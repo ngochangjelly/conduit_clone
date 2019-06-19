@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { baseURL } from '../constants/baseURL';
 import { SET_ALL_TAGS } from '../constants/actionTypes';
 export const fetchAllTags = data => {
   return {
@@ -11,7 +11,7 @@ export const fetchAllTags = data => {
 export const getAllTags = () => {
   return dispatch => {
     return axios
-      .get(`${process.env.REACT_APP_API}/tags`)
+      .get(`${baseURL}/tags`)
       .then(response => {
         return dispatch(fetchAllTags(response.data.tags));
       })

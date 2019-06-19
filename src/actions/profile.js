@@ -1,8 +1,9 @@
 import axios from 'axios';
 
+import { baseURL } from '../constants/baseURL';
 export const getProfile = data => {
   return axios
-    .get(`${process.env.REACT_APP_API}/profiles/${data}`)
+    .get(`${baseURL}/profiles/${data}`)
     .then(res => {
       return res.data.profile;
     })

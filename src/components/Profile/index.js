@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { FaCog } from 'react-icons/fa';
 
+import { baseURL } from '../../constants/baseURL';
 import history from '../../constants/history';
 import { getProfile } from '../../actions/profile';
 import { getArticlesByAuthor } from '../../actions/articles';
@@ -45,16 +46,8 @@ const Profile = props => {
 
   const handleClick = following => {
     following
-      ? axios
-          .delete(
-            `${process.env.REACT_APP_API}/profiles/${profile.username}/follow`,
-          )
-          .then()
-      : axios
-          .post(
-            `${process.env.REACT_APP_API}/profiles/${profile.username}/follow`,
-          )
-          .then();
+      ? axios.delete(`${baseURL}/profiles/${profile.username}/follow`).then()
+      : axios.post(`${baseURL}/profiles/${profile.username}/follow`).then();
   };
 
   return (

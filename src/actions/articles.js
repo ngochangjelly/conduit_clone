@@ -3,7 +3,7 @@ import axios from 'axios';
 import { SET_ALL_ARTICLES_BY_TAG } from '../constants/actionTypes';
 import { store } from '../store';
 import history from '../constants/history';
-
+import { baseURL } from '../constants/baseURL';
 export const toggleLikeArticle = (slug, favorited) => {
   let config = {
     headers: {
@@ -12,7 +12,7 @@ export const toggleLikeArticle = (slug, favorited) => {
   };
   if (favorited) {
     return axios
-      .delete(`${process.env.REACT_APP_API}/articles/${slug}/favorite`, config)
+      .delete(`${baseURL}/articles/${slug}/favorite`, config)
       .then(response => {
         return response.data.article;
       })
@@ -21,7 +21,7 @@ export const toggleLikeArticle = (slug, favorited) => {
       });
   }
   return axios
-    .post(`${process.env.REACT_APP_API}/articles/${slug}/favorite`, {}, config)
+    .post(`${baseURL}/articles/${slug}/favorite`, {}, config)
     .then(response => {
       return response.data.article;
     })
@@ -39,7 +39,7 @@ export const createArticle = data => {
   };
   return axios
     .post(
-      `${process.env.REACT_APP_API}/articles`,
+      `${baseURL}/articles`,
       {
         article: {
           title: title,
@@ -63,7 +63,7 @@ export const getArticlesByAuthor = data => {
   const currentPage = 0;
   return axios
     .get(
-      `${process.env.REACT_APP_API}/articles?author=${data}&limit=10&offset=${
+      `${baseURL}/articles?author=${data}&limit=10&offset=${
         currentPage ? currentPage * 10 : 0
       }`,
     )
@@ -84,7 +84,7 @@ export const getUserFavoritedArticles = data => {
   };
   return axios
     .get(
-      `${process.env.REACT_APP_API}/articles/feed?limit=10&offset=${
+      `${baseURL}/articles/feed?limit=10&offset=${
         currentPage ? currentPage * 10 : 0
       }`,
       config,
@@ -107,7 +107,7 @@ export const getAllArticles = (currentPage, currentUser) => {
     : null;
   return axios
     .get(
-      `${process.env.REACT_APP_API}/articles?limit=10&offset=${
+      `${baseURL}/articles?limit=10&offset=${
         currentPage ? currentPage * 10 : 0
       }`,
       config,
@@ -130,7 +130,7 @@ export const getAllArticlesByTag = (tag, page) => {
   return dispatch => {
     return axios
       .get(
-        `${process.env.REACT_APP_API}/articles?tag=${tag}&limit=10&offset=${
+        `${baseURL}/articles?tag=${tag}&limit=10&offset=${
           page ? page * 10 : 0
         }`,
       )
@@ -144,7 +144,7 @@ export const getAllArticlesByTag = (tag, page) => {
 };
 export const getArticleByID = id => {
   return axios
-    .get(`${process.env.REACT_APP_API}/articles/${id}`)
+    .get(`${baseURL}/articles/${id}`)
     .then(response => {
       return response.data.article;
     })

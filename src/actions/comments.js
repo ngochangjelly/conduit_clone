@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { baseURL } from '../constants/baseURL';
 import { REMOVE_COMMENT } from '../constants/actionTypes';
 import { store } from '../store';
 export const dispatchRemoveComment = data => {
@@ -16,12 +17,7 @@ export const removeComment = (articleID, commentID) => {
     },
   };
   return axios
-    .delete(
-      `${
-        process.env.REACT_APP_API
-      }/articles/${articleID}/comments/${commentID}`,
-      config,
-    )
+    .delete(`${baseURL}/articles/${articleID}/comments/${commentID}`, config)
     .then(res => {
       return commentID;
     })
@@ -31,7 +27,7 @@ export const removeComment = (articleID, commentID) => {
 };
 export const getCommentsByArticle = data => {
   return axios
-    .get(`${process.env.REACT_APP_API}/articles/${data}/comments`)
+    .get(`${baseURL}/articles/${data}/comments`)
     .then(response => {
       return response.data.comments;
     })
@@ -47,7 +43,7 @@ export const postComment = (id, data) => {
   };
   return axios
     .post(
-      `${process.env.REACT_APP_API}/articles/${id}/comments`,
+      `${baseURL}/articles/${id}/comments`,
       { comment: { body: data } },
       config,
     )

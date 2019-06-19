@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { baseURL } from '../constants/baseURL';
 import { store } from '../store';
 import { SET_USER, SET_USER_UPDATE } from '../constants/actionTypes';
 import history from '../constants/history';
@@ -13,7 +14,7 @@ export const register = data => {
   const { username, email, password } = data;
   return dispatch => {
     return axios
-      .post(`${process.env.REACT_APP_API}/users`, {
+      .post(`${baseURL}/users`, {
         user: {
           username: username,
           email: email,
@@ -38,7 +39,7 @@ export const login = data => {
   const { username, password } = data;
   return dispatch => {
     return axios
-      .post(`${process.env.REACT_APP_API}/users/login`, {
+      .post(`${baseURL}/users/login`, {
         user: {
           email: username,
           password: password,
@@ -75,7 +76,7 @@ export const updateUser = data => {
     };
     return axios
       .put(
-        `${process.env.REACT_APP_API}/user`,
+        `${baseURL}/user`,
         {
           user,
         },
