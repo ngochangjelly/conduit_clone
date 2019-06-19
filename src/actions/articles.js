@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+import { baseUrl } from '../constants/baseUrl';
+
 import { SET_ALL_ARTICLES_BY_TAG } from '../constants/actionTypes';
 import { store } from '../store';
 import history from '../constants/history';
-import { baseURL } from '../constants/baseURL';
+
 export const toggleLikeArticle = (slug, favorited) => {
   let config = {
     headers: {
@@ -12,7 +14,7 @@ export const toggleLikeArticle = (slug, favorited) => {
   };
   if (favorited) {
     return axios
-      .delete(`${baseURL}/articles/${slug}/favorite`, config)
+      .delete(`${baseUrl}/articles/${slug}/favorite`, config)
       .then(response => {
         return response.data.article;
       })
@@ -21,7 +23,7 @@ export const toggleLikeArticle = (slug, favorited) => {
       });
   }
   return axios
-    .post(`${baseURL}/articles/${slug}/favorite`, {}, config)
+    .post(`${baseUrl}/articles/${slug}/favorite`, {}, config)
     .then(response => {
       return response.data.article;
     })
@@ -39,7 +41,7 @@ export const createArticle = data => {
   };
   return axios
     .post(
-      `${baseURL}/articles`,
+      `${baseUrl}/articles`,
       {
         article: {
           title: title,
@@ -63,7 +65,7 @@ export const getArticlesByAuthor = data => {
   const currentPage = 0;
   return axios
     .get(
-      `${baseURL}/articles?author=${data}&limit=10&offset=${
+      `${baseUrl}/articles?author=${data}&limit=10&offset=${
         currentPage ? currentPage * 10 : 0
       }`,
     )
@@ -84,7 +86,7 @@ export const getUserFavoritedArticles = data => {
   };
   return axios
     .get(
-      `${baseURL}/articles/feed?limit=10&offset=${
+      `${baseUrl}/articles/feed?limit=10&offset=${
         currentPage ? currentPage * 10 : 0
       }`,
       config,
@@ -107,7 +109,7 @@ export const getAllArticles = (currentPage, currentUser) => {
     : null;
   return axios
     .get(
-      `${baseURL}/articles?limit=10&offset=${
+      `${baseUrl}/articles?limit=10&offset=${
         currentPage ? currentPage * 10 : 0
       }`,
       config,
@@ -130,7 +132,7 @@ export const getAllArticlesByTag = (tag, page) => {
   return dispatch => {
     return axios
       .get(
-        `${baseURL}/articles?tag=${tag}&limit=10&offset=${
+        `${baseUrl}/articles?tag=${tag}&limit=10&offset=${
           page ? page * 10 : 0
         }`,
       )
@@ -144,7 +146,7 @@ export const getAllArticlesByTag = (tag, page) => {
 };
 export const getArticleByID = id => {
   return axios
-    .get(`${baseURL}/articles/${id}`)
+    .get(`${baseUrl}/articles/${id}`)
     .then(response => {
       return response.data.article;
     })

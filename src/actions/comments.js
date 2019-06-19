@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { baseURL } from '../constants/baseURL';
+import { baseUrl } from '../constants/baseUrl';
+
 import { REMOVE_COMMENT } from '../constants/actionTypes';
 import { store } from '../store';
 export const dispatchRemoveComment = data => {
@@ -17,7 +18,7 @@ export const removeComment = (articleID, commentID) => {
     },
   };
   return axios
-    .delete(`${baseURL}/articles/${articleID}/comments/${commentID}`, config)
+    .delete(`${baseUrl}/articles/${articleID}/comments/${commentID}`, config)
     .then(res => {
       return commentID;
     })
@@ -27,7 +28,7 @@ export const removeComment = (articleID, commentID) => {
 };
 export const getCommentsByArticle = data => {
   return axios
-    .get(`${baseURL}/articles/${data}/comments`)
+    .get(`${baseUrl}/articles/${data}/comments`)
     .then(response => {
       return response.data.comments;
     })
@@ -43,7 +44,7 @@ export const postComment = (id, data) => {
   };
   return axios
     .post(
-      `${baseURL}/articles/${id}/comments`,
+      `${baseUrl}/articles/${id}/comments`,
       { comment: { body: data } },
       config,
     )

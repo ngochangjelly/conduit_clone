@@ -26,31 +26,34 @@ export const Tags = props => {
   }, []);
 
   return (
-    <div className="col-md-3">
-      <div className="sidebar">
-        <p>Popular tags</p>
-        {fetchingStatus === FETCHING && <p>Loading...</p>}
-        {fetchingStatus === FETCH_ERROR && <p>Tags are failed to load !</p>}
-        {fetchingStatus === FETCH_OK && tags.length === 0 && (
-          <p>No tags yet !</p>
-        )}
-        {tags &&
-          tagsArray.map((tag, index) => {
-            const handleClick = tag => {
-              store.dispatch(getAllArticlesByTag(tag));
-            };
-            return (
-              <a
-                onClick={e => handleClick(e)}
-                key={index}
-                href="/"
-                className="tag-default tag-pill"
-              >
-                {tag}
-              </a>
-            );
-          })}
-      </div>
+    <div className="overflow-auto relative px-4 py-4">
+      <p className="px-2 text-gray-700 text-base font-bold">Popular tags</p>
+
+      {fetchingStatus === FETCHING && (
+        <p className="text-gray-500 text-sm">Loading...</p>
+      )}
+      {fetchingStatus === FETCH_ERROR && (
+        <p className="text-gray-500 text-sm">Tags are failed to load !</p>
+      )}
+      {fetchingStatus === FETCH_OK && tags.length === 0 && (
+        <p className="text-gray-500 text-sm">No tags yet !</p>
+      )}
+      {tags &&
+        tagsArray.map((tag, index) => {
+          const handleClick = tag => {
+            store.dispatch(getAllArticlesByTag(tag));
+          };
+          return (
+            <a
+              onClick={e => handleClick(e)}
+              key={index}
+              href="/"
+              className="mx-1 my-1 inline-flex bg-gray-500 hover:bg-gray-600 text-white text-sm py-1 px-2 rounded-full"
+            >
+              {tag}
+            </a>
+          );
+        })}
     </div>
   );
 };

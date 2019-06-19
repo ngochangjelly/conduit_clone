@@ -1,9 +1,9 @@
 import axios from 'axios';
+import { baseUrl } from '../constants/baseUrl';
 
-import { baseURL } from '../constants/baseURL';
 export const getProfile = data => {
   return axios
-    .get(`${baseURL}/profiles/${data}`)
+    .get(`${baseUrl}/profiles/${data}`)
     .then(res => {
       return res.data.profile;
     })

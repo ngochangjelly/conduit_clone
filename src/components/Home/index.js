@@ -49,20 +49,20 @@ const Home = props => {
   }, [currentTab, currentUser]);
 
   return (
-    <div className="home-page">
+    <div className="flex flex-wrap sm:px-8 md:px-32 lg:px-32">
       {!props.currentUser && <Banner />}
-      <div className="container page">
-        <div className="row">
-          <MainView
-            articles={articles}
-            articlesCount={articlesCount}
-            setCurrentTab={setCurrentTab}
-            fetchingStatus={fetchingStatus}
-            currentTab={currentTab}
-            setArticles={setArticles}
-          />
-          <Tags />
-        </div>
+      <div className="sm:w-full md:w-full lg:w-3/4">
+        <MainView
+          articles={articles}
+          articlesCount={articlesCount}
+          setCurrentTab={setCurrentTab}
+          fetchingStatus={fetchingStatus}
+          currentTab={currentTab}
+          setArticles={setArticles}
+        />
+      </div>
+      <div className="bg-gray-100 h-full xs:w-full sm:w-full md:w-full lg:w-1/4">
+        <Tags />
       </div>
     </div>
   );

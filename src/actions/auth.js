@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { baseURL } from '../constants/baseURL';
+import { baseUrl } from '../constants/baseUrl';
+
 import { store } from '../store';
 import { SET_USER, SET_USER_UPDATE } from '../constants/actionTypes';
 import history from '../constants/history';
@@ -14,7 +15,7 @@ export const register = data => {
   const { username, email, password } = data;
   return dispatch => {
     return axios
-      .post(`${baseURL}/users`, {
+      .post(`${baseUrl}/users`, {
         user: {
           username: username,
           email: email,
@@ -39,7 +40,7 @@ export const login = data => {
   const { username, password } = data;
   return dispatch => {
     return axios
-      .post(`${baseURL}/users/login`, {
+      .post(`${baseUrl}/users/login`, {
         user: {
           email: username,
           password: password,
@@ -76,7 +77,7 @@ export const updateUser = data => {
     };
     return axios
       .put(
-        `${baseURL}/user`,
+        `${baseUrl}/user`,
         {
           user,
         },

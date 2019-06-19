@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { FaCog } from 'react-icons/fa';
 
-import { baseURL } from '../../constants/baseURL';
+import { baseUrl } from '../../constants/baseUrl';
 import history from '../../constants/history';
 import { getProfile } from '../../actions/profile';
 import { getArticlesByAuthor } from '../../actions/articles';
@@ -39,51 +39,50 @@ const Profile = props => {
       })
       .catch(err => {
         setFetchingStatus(FETCH_ERROR);
-
         throw err;
       });
   }, [props.match.params.id]);
 
   const handleClick = following => {
     following
-      ? axios.delete(`${baseURL}/profiles/${profile.username}/follow`).then()
-      : axios.post(`${baseURL}/profiles/${profile.username}/follow`).then();
+      ? axios.delete(`${baseUrl}/profiles/${profile.username}/follow`).then()
+      : axios.post(`${baseUrl}/profiles/${profile.username}/follow`).then();
   };
 
   return (
-    <div className="profile-page">
-      <div className="user-info">
-        <div className="container">
-          <div className="row">
-            {profile && (
-              <div className="col-xs-12 col-md-10 offset-md-1">
-                <img
-                  src={profile.image}
-                  className="user-img"
-                  alt={profile.username}
-                />
-                <h4>{profile.username}</h4>
-                <p>{profile.bio}</p>
+    <div className="sm:px-8 sm:px-8 md:px-32 lg:px-32 py-4">
+      <div className="bg-gray-200 text-gray-600">
+        {profile && (
+          <div className="flex flex-wrap">
+            <div className="flex justify-center items-center">
+              <img
+                src={profile.image}
+                className="h-16 w-16 rounded-full"
+                alt={profile.username}
+              />
+            </div>
+            <h4 className="w-full flex justify-center font-bold">
+              {profile.username}
+            </h4>
+            <p className="w-full flex justify-center">{profile.bio}</p>
 
-                {currentUser && currentUser.username === profile.username ? (
-                  <button
-                    className="btn btn-sm action-btn btn-outline-secondary"
-                    onClick={() => history.push('/settings')}
-                  >
-                    <FaCog />
-                    &nbsp; Edit Profile Settings
-                  </button>
-                ) : (
-                  <FollowButtonToggle
-                    handleClick={handleClick}
-                    currentUser={currentUser}
-                    profile={profile}
-                  />
-                )}
-              </div>
+            {currentUser && currentUser.username === profile.username ? (
+              <button
+                className="w-full flex justify-center"
+                onClick={() => history.push('/settings')}
+              >
+                <FaCog className="inline-flex" />
+                Edit Profile Settings
+              </button>
+            ) : (
+              <FollowButtonToggle
+                handleClick={handleClick}
+                currentUser={currentUser}
+                profile={profile}
+              />
             )}
           </div>
-        </div>
+        )}
       </div>
 
       <div className="container">

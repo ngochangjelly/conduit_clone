@@ -15,9 +15,9 @@ const MainView = props => {
   } = props;
 
   return (
-    <div className="col-md-9">
-      <div className="feed-toggle">
-        <ul className="nav nav-pills outline-active">
+    <div className="flex flex-wrap">
+      <div className="w-full">
+        <ul className="mt-4 inline-flex">
           {currentUser && (
             <YourFeedTab
               currentTab={currentTab}
@@ -35,12 +35,14 @@ const MainView = props => {
         </ul>
       </div>
       {articles && articlesCount && (
-        <ArticlePreviews
-          articlesCount={articlesCount}
-          articles={articles}
-          fetchingStatus={fetchingStatus}
-          setArticles={props.setArticles}
-        />
+        <div className="w-full">
+          <ArticlePreviews
+            articlesCount={articlesCount}
+            articles={articles}
+            fetchingStatus={fetchingStatus}
+            setArticles={props.setArticles}
+          />
+        </div>
       )}
     </div>
   );
@@ -56,12 +58,14 @@ const YourFeedTab = props => {
     props.setCurrentTab(currentTab);
   };
   return (
-    <li className="nav-item">
+    <li className="mr-10 text-gray-500 text-lg font-bold ">
       <button
         name="your-feed"
         onClick={e => handleClick(e)}
         className={
-          props.currentTab === currentTab ? 'nav-link active' : 'nav-link'
+          props.currentTab === currentTab
+            ? 'inline-flex text-sm text-green-600 hover:text-green-600'
+            : 'inline-flex text-sm text-gray-500 hover:text-green-600'
         }
       >
         Your Feed
@@ -76,12 +80,14 @@ const GlobalFeedTab = props => {
     props.setCurrentTab(currentTab);
   };
   return (
-    <li className="nav-item">
+    <li className="flex-inline mr-10">
       <button
         name="global-feed"
         onClick={e => handleClick(e)}
         className={
-          props.currentTab === currentTab ? 'nav-link active' : 'nav-link'
+          props.currentTab === currentTab
+            ? 'text-sm text-green-600'
+            : 'text-sm text-gray-500'
         }
       >
         Global Feed
@@ -96,10 +102,12 @@ const ArticlesFilterByTag = props => {
   }
   const currentTab = TAG_FILTER;
   return (
-    <li className="nav-item">
+    <li>
       <button
         className={
-          props.currentTab === currentTab ? 'nav-link active' : 'nav-link'
+          props.currentTab === currentTab
+            ? 'text-lg font-bold text-green-600'
+            : 'text-lg font-bold text-gray-500'
         }
       >
         <FaHashtag />

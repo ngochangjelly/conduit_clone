@@ -16,24 +16,12 @@ const mapStateToProps = state => {
 const Settings = props => {
   const { currentUser } = props;
   return (
-    <div className="settings-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Your Settings</h1>
-            {currentUser && <SettingsForm currentUser={currentUser} />}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">
-              <hr />
-              <button onClick={logout} className="btn btn-outline-danger">
-                Or click here to logout.
-              </button>
-            </h1>
-          </div>
-        </div>
+    <div className="flex justify-center sm:px-8 sm:px-8 md:px-16 py-8">
+      <div className="sm:w-3/4 md:w-3/4 lg:w-1/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <p className="flex justify-center text-lg text-gray-600 font-bold pb-4">
+          Your Settings
+        </p>
+        {currentUser && <SettingsForm currentUser={currentUser} />}
       </div>
     </div>
   );
@@ -64,65 +52,69 @@ const SettingsForm = props => {
       initialValues={initialValues}
       render={({ handleSubmit, form, submitting, values }) => (
         <form onSubmit={values => handleSubmit(values)}>
-          <div className="form-group">
+          <div className="mb-4">
             <Field
               name="image"
               component="input"
               type="text"
               placeholder="URL of profile picture"
-              className="form-control form-control-lg"
+              className="text-sm text-gray-600 text-sm appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               rows="8"
             />
           </div>
-          <div className="form-group">
+          <div className="mb-4">
             <Field
               name="username"
               component="input"
               type="text"
               placeholder="Username"
-              className="form-control form-control-lg"
+              className="text-sm text-gray-600 text-sm appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               rows="8"
             />
           </div>
 
-          <div className="form-group">
+          <div className="mb-4">
             <Field
               name="bio"
               component="input"
               type="textarea"
               placeholder="Short bio about you"
-              className="form-control form-control-lg"
+              className="text-sm text-gray-600 text-sm appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               rows="8"
             />
           </div>
-          <div className="form-group">
+          <div className="mb-4">
             <Field
               name="email"
               component="input"
               type="email"
               placeholder="Email"
-              className="form-control form-control-lg"
+              className="text-sm text-gray-600 text-sm appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               rows="8"
             />
           </div>
-          <div className="form-group">
+          <div className="mb-4">
             <Field
               name="password"
               component="input"
               type="password"
               placeholder="New Password"
-              className="form-control form-control-lg"
+              className="text-sm text-gray-600 text-sm appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               rows="8"
             />
           </div>
-          <div className="buttons">
+          <div className="flex justify-between">
             <button
-              className="btn btn-lg btn-primary pull-xs-right"
+              className="text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               href="/"
               type="submit"
               disabled={submitting}
             >
               Submit
+            </button>
+            <button onClick={logout} className="text-gray-600 text-sm">
+              Or click <span className="font-bold text-red-500">here</span> to
+              logout.
             </button>
           </div>
         </form>

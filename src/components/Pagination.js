@@ -13,22 +13,28 @@ const Pagination = props => {
   }
 
   return (
-    <nav>
-      <ul className="pagination">
-        {pageRange.map(page => {
-          const isCurrent = page === props.currentPage;
-          return (
-            <li
-              className={isCurrent ? 'page-item active' : 'page-item'}
-              onClick={() => getAllArticles(page)}
-              key={page}
+    <ul className="inline-flex flex-wrap mb-4">
+      {pageRange.map(page => {
+        const isCurrent = page === props.currentPage;
+        return (
+          <li
+            className={isCurrent ? 'bg-green-500' : ''}
+            onClick={() => getAllArticles(page)}
+            key={page}
+          >
+            <button
+              className={
+                isCurrent
+                  ? 'text-gray-500 bg-green-500 text-sm font-bold py-2 px-4 rounded'
+                  : 'bg-gray-100 hover:bg-green-500 hover:text-white text-gray-500 text-sm font-bold py-2 px-4 rounded'
+              }
             >
-              <button className="page-link">{page + 1}</button>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+              {page + 1}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 const mapStateToProps = state => {

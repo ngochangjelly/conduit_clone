@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { baseURL } from '../constants/baseURL';
+
+import { baseUrl } from '../constants/baseUrl';
+
 import { SET_ALL_TAGS } from '../constants/actionTypes';
 export const fetchAllTags = data => {
   return {
@@ -11,7 +13,7 @@ export const fetchAllTags = data => {
 export const getAllTags = () => {
   return dispatch => {
     return axios
-      .get(`${baseURL}/tags`)
+      .get(`${baseUrl}/tags`)
       .then(response => {
         return dispatch(fetchAllTags(response.data.tags));
       })

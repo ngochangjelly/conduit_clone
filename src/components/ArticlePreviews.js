@@ -21,13 +21,13 @@ const ArticlePreviews = props => {
       });
   };
   if (fetchingStatus === FETCHING)
-    return <div className="article-preview">Loading...</div>;
+    return <div className="text-gray-500">Loading...</div>;
   if (fetchingStatus === FETCH_ERROR)
-    return <div className="article-preview">Articles are failed to load !</div>;
+    return <div className="text-gray-500">Articles are failed to load !</div>;
   return (
     articles &&
     articles.length > 0 && (
-      <div>
+      <div className="">
         {articles.map((article, key) => {
           return (
             <ArticlePreview
